@@ -1,6 +1,6 @@
 // Add your code here
 
-document.addEventListener("DOMContentLoaded", submitData)
+// document.addEventListener("DOMContentLoaded", submitData)
 //submitData(); 
 // -> posts multiple times. Why?
 
