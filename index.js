@@ -8,20 +8,6 @@
 
 
 
-let formData = {
-    name: "Steve",
-    email: "steve@steve.com"
-};
-
-let configObj = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json", //data type we are sending
-      "Accept": "application/json" //data type we accept in return
-    },
-    body: JSON.stringify(formData) //convert our request object to string
-  };
-
 //   fetch("http://localhost:3000/dogs", configObj)
 
 //     .then(function(response) {
@@ -36,20 +22,44 @@ let configObj = {
 //       console.log(error.message);
 //   });
 
+let saveButton = document.getElementById("saveButton")
+saveButton.addEventListener("click", submitData)
+// saveButton.addEventListener("click", function(event) {
+//   submitData();
+//   event.preventDefault();
+// },false)
+
+
 function submitData() {
+    let nameInput = document.getElementById("uname").value;
+    let emailInput = document.getElementById("email").value;
+    let formData = {
+      name: nameInput,
+      email: emailInput
+  };
+
+  let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", //data type we are sending
+        "Accept": "application/json" //data type we accept in return
+      },
+      body: JSON.stringify(formData) //convert our request object to string
+    };
     return fetch('http://localhost:3000/users', configObj)
     .then(response => {
       return response.json();
     })
     .then(object => {
-      console.log(object);
-      console.log(object.id);
-      const newList = document.createElement("ul");
-      const element = document.createElement("li");
-      element.innerHTML = object.id;
-      newList.appendChild(element)
-      console.log(newList)
-      document.body.appendChild(newList)
+      // console.log(object);
+      // console.log(object.id);
+      // const newList = document.createElement("ul");
+      // const element = document.createElement("li");
+      // element.innerHTML = object.id;
+      // newList.appendChild(element)
+      // console.log(newList)
+      // document.body.appendChild(newList)
+      document.body.innerHTML = object[ "id" ]
     })
     .catch(error => {
       alert("Bad things!");
@@ -59,3 +69,30 @@ function submitData() {
     })
 }
 
+
+
+// Lab solution
+// function submitData( name, email ) {
+//   return fetch( 'http://localhost:3000/users', {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Accept": "application/json"
+//       },
+//       body: JSON.stringify( {
+//         name,
+//         email
+//       } )
+//     } )
+//     .then( function ( response ) {
+//       return response.json()
+//     } )
+//     .then( function ( object ) {
+//       document.body.innerHTML = object[ "id" ]
+//       console.log(object["id"])
+//     } )
+//     .catch( function ( error ) {
+//       document.body.innerHTML = error.message
+//     } )
+    
+// }
